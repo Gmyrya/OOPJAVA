@@ -1,5 +1,7 @@
 package po83.gmyrya.oop.model;
 
+import java.util.Objects;
+
 public class Department {
 
     private String name;
@@ -59,6 +61,22 @@ public class Department {
         return -1;
     }
 
+    public int getLastIndex(Equipment equipment) {
+        Node temp = head;
+        int lastIndex = -1;
+        for (int i = 0; i < size; i++) {
+            if (temp.value.equals(equipment)) {
+                lastIndex = i;
+            }
+            temp = temp.next;
+        }
+        return lastIndex;
+    }
+
+    public int getIndex(Equipment equipment) {
+        return getIndex(equipment.getEquipmentNumber());
+    }
+
     public boolean equipmentExist(long equipmentNumber) {
         Equipment equipment = getByID(equipmentNumber);
         return equipment != null;
@@ -83,6 +101,10 @@ public class Department {
         return removeNode(index);
     }
 
+    public boolean remove(Equipment equipment) {
+        return removeByID(equipment.getEquipmentNumber()) != null;
+    }
+
     public Equipment removeByID(long equipmentNumber) {
         return removeNode(getIndex(equipmentNumber));
     }
@@ -100,7 +122,7 @@ public class Department {
     public Equipment[] toArray(String equipmentName) {
         Node temp = head;
         Equipment[] equipments = new Equipment[getCountItemsByName(equipmentName)];
-        int index=0;
+        int index = 0;
         for (int i = 0; i < size; i++) {
             if (temp.value.getEquipmentName().equals(equipmentName)) {
                 equipments[index++] = temp.value;
@@ -110,10 +132,10 @@ public class Department {
         return equipments;
     }
 
-    public Equipment[] toArray(EquipmentTypes type){
+    public Equipment[] toArray(EquipmentTypes type) {
         Node temp = head;
         Equipment[] equipments = new Equipment[getCountItemsByType(type)];
-        int index=0;
+        int index = 0;
         for (int i = 0; i < size; i++) {
             if (temp.value.getType().equals(type)) {
                 equipments[index++] = temp.value;
@@ -247,13 +269,41 @@ public class Department {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Department{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", head=").append(head);
-        sb.append(", tail=").append(tail);
-        sb.append(", size=").append(size);
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder("Department: ");
+        sb.append(name).append(". ").append(size).append(" registered equipments:\n");
+        Node temp = head;
+        for (int i = 0; i < size; i++) {
+            sb.append(temp.value.toString()).append("\n");
+            temp = temp.next;
+        }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Department)) return false;
+        Department that = (Department) o;
+        if (size != that.size) return false;
+        Node temp = head;
+        for (int i = 0; i < size; i++) {
+            if (temp.value.getEquipmentNumber() != that.get(i).getEquipmentNumber()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 31 * size;
+        result = 31 * name.hashCode();
+        Node temp = head;
+        for (int i = 0; i < size; i++) {
+            result = 31 * temp.value.hashCode();
+            temp = temp.next;
+        }
+        return result;
     }
 
     private class Node {

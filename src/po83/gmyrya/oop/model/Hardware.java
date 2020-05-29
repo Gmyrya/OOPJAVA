@@ -1,5 +1,7 @@
 package po83.gmyrya.oop.model;
 
+import java.util.Objects;
+
 public class Hardware implements Equipment {
 
     private long number;
@@ -15,7 +17,7 @@ public class Hardware implements Equipment {
     public Hardware(long number, String name) {
         this.number = number;
         this.name = name;
-        type=EquipmentTypes.OTHER;
+        type = EquipmentTypes.OTHER;
     }
 
     @Override
@@ -46,5 +48,28 @@ public class Hardware implements Equipment {
     @Override
     public void setType(EquipmentTypes type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Hardware: %s, %s, inventory name: %d", type, name, number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Hardware)) return false;
+        Hardware hardware = (Hardware) o;
+        return number == hardware.number &&
+                Objects.equals(name, hardware.name) &&
+                type == hardware.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (53 * number);
+        result = 53 * name.hashCode();
+        result = 53 * type.hashCode();
+        return result;
     }
 }

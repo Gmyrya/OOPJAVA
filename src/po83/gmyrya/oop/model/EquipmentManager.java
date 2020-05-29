@@ -43,6 +43,11 @@ public class EquipmentManager extends DepartmentManager {
         return null;
     }
 
+    public boolean remove(Equipment equipment) {
+        return remove(equipment.getEquipmentNumber()) != null;
+
+    }
+
     public Equipment[] getTypedEquipments(EquipmentTypes type) {
         ArrayList<Equipment> buf = new ArrayList<>();
         for (Department department : getDepartments()) {

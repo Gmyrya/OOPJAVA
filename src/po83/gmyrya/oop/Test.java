@@ -11,6 +11,8 @@ public class Test {
         lab2test();
         System.out.println("\n\nЛабораторная 3");
         lab3test();
+        System.out.println("\n\nЛабораторная 4");
+        lab4test();
     }
 
     public static void lab1test() {
@@ -86,9 +88,36 @@ public class Test {
 
         equipments = manager.getTypedEquipments(EquipmentTypes.OTHER);
 
-        for (int i = 0; i < equipments.length; i++) {
-            System.out.println(equipments[i].getEquipmentName());
+        for (Equipment value : equipments) {
+            System.out.println(value.getEquipmentName());
         }
+    }
 
+    public static void lab4test(){
+        Equipment equipment = new Hardware(2);
+        Equipment equipment1 = new Furniture(1, "Test");
+        Equipment equipment2 = new Hardware(2, "Hello");
+        Equipment equipment3 = new Furniture(2, "Test");
+        Equipment equipment4 = new Hardware(3, "Test");
+        Equipment[] equipments = new Equipment[]{equipment, equipment1,
+                equipment2, equipment3, equipment4};
+
+        Department department = new Department(equipments);
+
+        equipment = new Hardware(4);
+        equipment1 = new Furniture(2, "Hi");
+        equipment2 = new Hardware(2, "Lof");
+        equipment3 = new Furniture(2, "Hi");
+        equipment4 = new Hardware(3, "Test");
+        equipments = new Equipment[]{equipment, equipment1,
+                equipment2, equipment3, equipment4};
+
+        Department department1 = new Department(equipments);
+
+        EquipmentManager manager = new EquipmentManager(new Department[]{department, department1});
+
+        System.out.println(manager.hashCode());
+        System.out.println(manager);
+        System.out.println(equipment1.equals(equipment3));
     }
 }

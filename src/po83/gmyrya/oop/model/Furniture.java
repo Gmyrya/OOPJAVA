@@ -1,5 +1,7 @@
 package po83.gmyrya.oop.model;
 
+import java.util.Objects;
+
 public class Furniture implements Equipment {
 
     private long number;
@@ -46,5 +48,28 @@ public class Furniture implements Equipment {
     @Override
     public void setType(EquipmentTypes type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("“Furniture: %s, %s, inventory name: %d", type, name, number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Furniture)) return false;
+        Furniture furniture = (Furniture) o;
+        return number == furniture.number &&
+                Objects.equals(name, furniture.name) &&
+                type == furniture.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (71 * number);
+        result = 71 * name.hashCode();
+        result = 71 * type.hashCode();
+        return result;
     }
 }

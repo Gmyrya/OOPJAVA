@@ -1,6 +1,8 @@
 package po83.gmyrya.oop.model;
 import po83.gmyrya.oop.model.Department;
 
+import java.util.Arrays;
+
 public class DepartmentManager {
 
     private Department[] departments;
@@ -99,6 +101,16 @@ public class DepartmentManager {
         return null;
     }
 
+    public boolean remove(Department department) {
+        for (int i = 0; i < size; i++) {
+            if (departments[i].equals(department)) {
+                remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getSize() {
         return size;
     }
@@ -109,5 +121,15 @@ public class DepartmentManager {
             copyDepartments[i] = departments[i];
         }
         return copyDepartments;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("DepartmentManager: ");
+        sb.append("registered ").append(size).append(" departments:\n");
+        for (int i = 0; i < size; i++) {
+            sb.append(departments[i].toString()).append("\n");
+        }
+        return sb.toString();
     }
 }
