@@ -4,6 +4,7 @@ public class Hardware implements Equipment {
 
     private long number;
     private String name;
+    private EquipmentTypes type;
 
     public static final String HARDWARE = "Hardware";
 
@@ -14,6 +15,7 @@ public class Hardware implements Equipment {
     public Hardware(long number, String name) {
         this.number = number;
         this.name = name;
+        type=EquipmentTypes.OTHER;
     }
 
     @Override
@@ -34,5 +36,15 @@ public class Hardware implements Equipment {
     @Override
     public void setEquipmentName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public EquipmentTypes getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(EquipmentTypes type) {
+        this.type = type;
     }
 }

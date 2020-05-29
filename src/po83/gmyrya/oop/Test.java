@@ -9,6 +9,8 @@ public class Test {
         lab1test();
         System.out.println("\n\nЛабораторная 2");
         lab2test();
+        System.out.println("\n\nЛабораторная 3");
+        lab3test();
     }
 
     public static void lab1test() {
@@ -54,5 +56,39 @@ public class Test {
         for (Equipment equip : equipmentsTest) {
             System.out.println(equip.getEquipmentName());
         }
+    }
+
+    public static void lab3test() {
+        Equipment equipment = new Hardware(2);
+        Equipment equipment1 = new Furniture(1, "Test");
+        Equipment equipment2 = new Hardware(2, "Hello");
+        Equipment equipment3 = new Furniture(2, "Test");
+        Equipment equipment4 = new Hardware(3, "Test");
+        Equipment[] equipments = new Equipment[]{equipment, equipment1,
+                equipment2, equipment3, equipment4};
+
+        Department department = new Department(equipments);
+
+        equipment = new Hardware(4);
+        equipment1 = new Furniture(1, "Hi");
+        equipment2 = new Hardware(2, "Lof");
+        equipment3 = new Furniture(2, "Hi");
+        equipment4 = new Hardware(3, "Test");
+        equipments = new Equipment[]{equipment, equipment1,
+                equipment2, equipment3, equipment4};
+
+        Department department1 = new Department(equipments);
+
+        EquipmentManager manager = new EquipmentManager(new Department[]{department, department1});
+        System.out.println(manager.getDepartmentWithEquipment(2));
+        System.out.println(manager.remove(4L).getEquipmentName());
+        System.out.println(manager.set(3, new Hardware(1, "Hahohi")).getEquipmentName());
+
+        equipments = manager.getTypedEquipments(EquipmentTypes.OTHER);
+
+        for (int i = 0; i < equipments.length; i++) {
+            System.out.println(equipments[i].getEquipmentName());
+        }
+
     }
 }

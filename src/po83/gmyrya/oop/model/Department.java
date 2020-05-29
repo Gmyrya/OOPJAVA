@@ -110,6 +110,31 @@ public class Department {
         return equipments;
     }
 
+    public Equipment[] toArray(EquipmentTypes type){
+        Node temp = head;
+        Equipment[] equipments = new Equipment[getCountItemsByType(type)];
+        int index=0;
+        for (int i = 0; i < size; i++) {
+            if (temp.value.getType().equals(type)) {
+                equipments[index++] = temp.value;
+            }
+            temp = temp.next;
+        }
+        return equipments;
+    }
+
+    public int getCountItemsByType(EquipmentTypes type) {
+        Node temp = head;
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (temp.value.getType().equals(type)) {
+                count++;
+            }
+            temp = temp.next;
+        }
+        return count;
+    }
+
     public int getCountItemsByName(String equipmentName) {
         Node temp = head;
         int count = 0;
@@ -218,6 +243,17 @@ public class Department {
         Equipment oldEquipment = temp.value;
         temp.value = equipment;
         return oldEquipment;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Department{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", head=").append(head);
+        sb.append(", tail=").append(tail);
+        sb.append(", size=").append(size);
+        sb.append('}');
+        return sb.toString();
     }
 
     private class Node {

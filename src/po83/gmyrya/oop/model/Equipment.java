@@ -10,4 +10,8 @@ public interface Equipment {
 
     void setEquipmentName(String name);
 
+    EquipmentTypes getType();
+
+    void setType(EquipmentTypes type);
+
 }
